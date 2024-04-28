@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  me:
+    privileged: true
+    volumes:
+      - /home/ho/_mmd/seame/ME/src:/home
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY}
+    build:
+        context: .
+        dockerfile: ./Dockerfile
+    tty: true
+    stdin_open: true 

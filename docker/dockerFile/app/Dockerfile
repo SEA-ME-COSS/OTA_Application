@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt upgrade -y \
  && apt install -y tmux git vim openjdk-17-jdk \
  && apt install -y build-essential openssl libssl-dev libssl3 libgl1-mesa-dev libqt5x11extras5 '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev \
- && apt install -y libxdamage-dev pulseaudio libxcursor-dev
+ && apt install -y libxdamage-dev pulseaudio libxcursor-dev \
+ && apt install -y zlib1g-dev libcurlpp-dev
 
 CMD ["/bin/bash"]

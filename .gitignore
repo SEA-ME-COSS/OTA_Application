@@ -2,6 +2,7 @@ android-sdk/
 *.keystore
 setUp/
 *.user
+user.*
 build/
 *.txt
 tmp/

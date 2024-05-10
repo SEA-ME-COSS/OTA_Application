@@ -6,3 +6,5 @@ user.*
 build/
 *.txt
 tmp/
+server/
+map.png

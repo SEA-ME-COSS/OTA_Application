@@ -35,7 +35,7 @@ Item {
         anchors.top: blank_map_main.bottom
 
         Image {
-            source: "images/demo_map.png"
+            source: "images/map.png"
             anchors.fill: parent
             fillMode: Image.PreserveAspectFit
         }

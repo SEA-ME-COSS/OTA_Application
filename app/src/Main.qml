@@ -8,10 +8,6 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    Component.onCompleted: {
-       dataFetcher.fetchData()
-    }
-
     Loader {
         id: splashScreenLoader
         source: "content/SplashScreen.qml"
@@ -40,7 +36,8 @@ Window {
     }
 
     Timer {
-       interval: 1000
+       interval: 100
+           //4500
        running: true
        repeat: false
        onTriggered: {

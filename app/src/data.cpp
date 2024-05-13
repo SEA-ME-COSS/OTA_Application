@@ -6,7 +6,7 @@ Data::Data(QObject *parent) : QObject(parent) {
 }
 
 void Data::fetchData() {
-    QUrl url("http://192.168.0.109/raw_data");
+    QUrl url("http://10.104.21.199/raw_data");
     QNetworkRequest request(url);
     manager->get(request);
 }
@@ -16,6 +16,17 @@ void Data::onFinished(QNetworkReply *reply) {
     QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
 
     QJsonArray dataArray = jsonDoc.array();
+    m_locations.clear();
+
+    for (const QJsonValue &value : dataArray) {
+        QJsonObject obj = value.toObject();
+        m_locationX = obj["LocationX"].toDouble();
+        m_locationY = obj["LocationY"].toDouble();
+        m_locations.append(QVariantMap{{"x", m_locationX}, {"y", m_locationY}});
+    }
+
+    emit locationsChanged();
+
     if (!dataArray.isEmpty()) {
         QJsonObject obj = dataArray.last().toObject();
         m_speed = QString::number(obj["Speed"].toDouble());
@@ -24,13 +35,12 @@ void Data::onFinished(QNetworkReply *reply) {
         m_acc = QString::number(obj["Acc"].toDouble());
         m_steering = QString::number(obj["Steering"].toDouble());
         m_time = QString::number(obj["Time"].toDouble());
-        m_locationX = QString::number(obj["LocationX"].toDouble());
-        m_locationY = QString::number(obj["LocationY"].toDouble());
         m_distance = QString::number(obj["Distance"].toDouble());
 
         emit dataChanged();
     }
 
+    //qDebug() << m_locations[0] << " " << m_locations[1];
     reply->deleteLater();
 }
 
@@ -58,14 +68,10 @@ QString Data::time() const {
     return m_time;
 }
 
-QString Data::locationX() const {
-    return m_locationX;
-}
-
-QString Data::locationY() const {
-    return m_locationY;
-}
-
 QString Data::distance() const {
     return m_distance;
+}
+
+ QVariantList Data::locations() const {
+    return m_locations;
 }

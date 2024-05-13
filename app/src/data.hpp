@@ -19,10 +19,9 @@ class Data : public QObject {
     Q_PROPERTY(QString brake READ brake NOTIFY dataChanged)
     Q_PROPERTY(QString acc READ acc NOTIFY dataChanged)
     Q_PROPERTY(QString steering READ steering NOTIFY dataChanged)
-    Q_PROPERTY(QString time READ time NOTIFY dataChanged)
-    Q_PROPERTY(QString locationX READ locationX NOTIFY dataChanged)
-    Q_PROPERTY(QString locationY READ locationY NOTIFY dataChanged)
+    Q_PROPERTY(QString time READ time NOTIFY dataChanged)    
     Q_PROPERTY(QString distance READ distance NOTIFY dataChanged)
+    Q_PROPERTY(QVariantList locations READ locations NOTIFY locationsChanged)
 
 public:
     Data(QObject *parent = nullptr);
@@ -34,11 +33,11 @@ public:
     QString acc() const;
     QString steering() const;
     QString time() const;
-    QString locationX() const;
-    QString locationY() const;
     QString distance() const;
+    QVariantList locations() const;
 
 signals:
+    void locationsChanged();
     void dataChanged();
 
 private slots:
@@ -46,14 +45,15 @@ private slots:
 
 private:
     QNetworkAccessManager *manager;
+    QVariantList m_locations;
     QString m_speed;
     QString m_throttle;
     QString m_brake;
     QString m_acc;
     QString m_steering;
     QString m_time;
-    QString m_locationX;
-    QString m_locationY;
+    double m_locationX;
+    double m_locationY;
     QString m_distance;
 };
 

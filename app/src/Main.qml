@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import "content"
 
 Window {
@@ -35,14 +34,24 @@ Window {
         visible: false
     }
 
+    Loader {
+        id: updateLoader
+        source: "content/Update.qml"
+        anchors.fill: parent
+        visible: false
+    }
+
     Timer {
-       interval: 100
+        id: loading
+        interval: 100
            //4500
-       running: true
-       repeat: false
-       onTriggered: {
+        running: true
+        repeat: false
+        onTriggered: {
            splashScreenLoader.source = "content/Menu.qml"
            homeLoader.visible = true
+           loading.running=false
        }
     }
 }
+

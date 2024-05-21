@@ -87,6 +87,7 @@ Item {
         styleLoader.visible = false
         mapLoader.visible = false
         homeLoader.visible = true
+        updateLoader.visible=false
 
         style_image.source = "images/home_style.png"
         home_image.source = "images/home_home.png"
@@ -97,6 +98,7 @@ Item {
         styleLoader.visible = true
         homeLoader.visible = false
         mapLoader.visible = false
+        updateLoader.visible=false
 
         style_image.source = "images/style_style.png"
         home_image.source = "images/style_home.png"
@@ -107,6 +109,7 @@ Item {
         styleLoader.visible = false
         homeLoader.visible = false
         mapLoader.visible = true
+        updateLoader.visible=false
 
         style_image.source = "images/map_style.png"
         home_image.source = "images/map_home.png"

@@ -20,6 +20,8 @@ Item {
         //color: "black"
 
         Rectangle {
+            id: setting_button
+
             width: parent.width * 0.08
             height: parent.height
             anchors.right: parent.right
@@ -33,6 +35,41 @@ Item {
                     anchors.fill: parent
                     onClicked: {
                         console.log("setting")
+                    }
+                }
+            }
+        }
+
+        Rectangle {
+            id: setting_margin
+
+            width: parent.width * 0.01
+            height: parent.height
+            anchors.right: setting_button.left
+        }
+
+
+        Rectangle {
+            id: alarm_button
+
+            width: parent.width * 0.08
+            height: parent.height
+            anchors.right: setting_margin.left
+
+            Image {
+                id: alarm_button_icon
+                source: "images/alarm_off.png"
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        console.log("alarm")
+                        updateLoader.visible = true
+                        styleLoader.visible = false
+                        homeLoader.visible = false
+                        mapLoader.visible = false
                     }
                 }
             }
@@ -167,7 +204,7 @@ Item {
             }
 
             Text {
-                text: dataFetcher.speed + " km"
+                text: dataFetcher.distance + " km"
                 x: 80
                 y: 70
             }
@@ -187,7 +224,7 @@ Item {
             }
 
             Text {
-                text: dataFetcher.throttle + " km"
+                text: dataFetcher.distance_available + " km"
                 x: 80
                 y: 70
             }
@@ -207,7 +244,7 @@ Item {
             }
 
             Text {
-                text: dataFetcher.brake + " %"
+                text: dataFetcher.battery + " %"
                 x: 83
                 y: 70
             }
@@ -220,7 +257,12 @@ Item {
         width: parent.width
         height: parent.height * 0.05
         anchors.top: status.bottom
+    }
 
-        //color: "black"
+    Connections {
+        target: ota
+        function onNewUpdate() {
+            alarm_button_icon.source = "images/alarm_on.png"
+        }
     }
 }

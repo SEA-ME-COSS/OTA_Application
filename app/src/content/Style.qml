@@ -35,36 +35,43 @@ Item {
         anchors.top: blank_style_main.bottom
 
         Image {
+            id: score_box
             source: "images/style_main.png"
             anchors.fill: parent
             fillMode: Image.PreserveAspectFit
         }
 
-        Text {
-            text: "Efficiency"
-            font.pointSize: 30
-            font.weight: Font.Black
+        Image {
+            id: scoreTime
+            source: time()
 
-            x: 180
-            y: 110
+            width: 230
+            height: 50
+
+            x: 150
+            y: 100
         }
 
-        Text {
-            text: "Fuel Efficiency"
-            font.pointSize: 30
-            font.weight: Font.Black
+        Image {
+            id: scoreFuel
+            source: fuel()
 
-            x: 180
-            y: 220
+            width: 230
+            height: 50
+
+            x: 150
+            y: 215
         }
 
-        Text {
-            text: "Safety"
-            font.pointSize: 30
-            font.weight: Font.Black
+        Image {
+            id: scoreSafety
+            source: safety()
 
-            x: 180
-            y: 340
+            width: 230
+            height: 50
+
+            x: 150
+            y: 330
         }
 
     }
@@ -90,5 +97,104 @@ Item {
             x: 140
             y: 55
         }
+    }
+
+    function time() {
+        if(dataFetcher.score_time < 7)
+            scoreTime.source = "images/lv1.png"
+        else if(dataFetcher.score_time < 14)
+            scoreTime.source = "images/lv2.png"
+        else if(dataFetcher.score_time < 21)
+            scoreTime.source = "images/lv3.png"
+        else if(dataFetcher.score_time < 28)
+            scoreTime.source = "images/lv4.png"
+        else if(dataFetcher.score_time < 35)
+            scoreTime.source = "images/lv5.png"
+        else if(dataFetcher.score_time < 42)
+            scoreTime.source = "images/lv6.png"
+        else if(dataFetcher.score_time < 49)
+            scoreTime.source = "images/lv7.png"
+        else if(dataFetcher.score_time < 56)
+            scoreTime.source = "images/lv8.png"
+        else if(dataFetcher.score_time < 63)
+            scoreTime.source = "images/lv9.png"
+        else if(dataFetcher.score_time < 70)
+            scoreTime.source = "images/lv10.png"
+        else if(dataFetcher.score_time < 76)
+            scoreTime.source = "images/lv11.png"
+        else if(dataFetcher.score_time < 82)
+            scoreTime.source = "images/lv12.png"
+        else if(dataFetcher.score_time < 88)
+            scoreTime.source = "images/lv13.png"
+        else if(dataFetcher.score_time < 94)
+            scoreTime.source = "images/lv14.png"
+        else
+            scoreTime.source = "images/lv15.png"
+    }
+
+    function fuel() {
+        if(dataFetcher.score_fuel < 7)
+            scoreFuel.source = "images/lv1.png"
+        else if(dataFetcher.score_fuel < 14)
+            scoreFuel.source = "images/lv2.png"
+        else if(dataFetcher.score_fuel < 21)
+            scoreFuel.source = "images/lv3.png"
+        else if(dataFetcher.score_fuel < 28)
+            scoreFuel.source = "images/lv4.png"
+        else if(dataFetcher.score_fuel < 35)
+            scoreFuel.source = "images/lv5.png"
+        else if(dataFetcher.score_fuel < 42)
+            scoreFuel.source = "images/lv6.png"
+        else if(dataFetcher.score_fuel < 49)
+            scoreFuel.source = "images/lv7.png"
+        else if(dataFetcher.score_fuel < 56)
+            scoreFuel.source = "images/lv8.png"
+        else if(dataFetcher.score_fuel < 63)
+            scoreFuel.source = "images/lv9.png"
+        else if(dataFetcher.score_fuel < 70)
+            scoreFuel.source = "images/lv10.png"
+        else if(dataFetcher.score_fuel < 76)
+            scoreFuel.source = "images/lv11.png"
+        else if(dataFetcher.score_fuel < 82)
+            scoreFuel.source = "images/lv12.png"
+        else if(dataFetcher.score_fuel < 88)
+            scoreFuel.source = "images/lv13.png"
+        else if(dataFetcher.score_fuel < 94)
+            scoreFuel.source = "images/lv14.png"
+        else
+            scoreFuel.source = "images/lv15.png"
+    }
+
+    function safety() {
+        if(dataFetcher.score_safety < 7)
+            scoreSafety.source = "images/lv1.png"
+        else if(dataFetcher.score_safety < 14)
+            scoreSafety.source = "images/lv2.png"
+        else if(dataFetcher.score_safety < 21)
+            scoreSafety.source = "images/lv3.png"
+        else if(dataFetcher.score_safety < 28)
+            scoreSafety.source = "images/lv4.png"
+        else if(dataFetcher.score_safety < 35)
+            scoreSafety.source = "images/lv5.png"
+        else if(dataFetcher.score_safety < 42)
+            scoreSafety.source = "images/lv6.png"
+        else if(dataFetcher.score_safety < 49)
+            scoreSafety.source = "images/lv7.png"
+        else if(dataFetcher.score_safety < 56)
+            scoreSafety.source = "images/lv8.png"
+        else if(dataFetcher.score_safety < 63)
+            scoreSafety.source = "images/lv9.png"
+        else if(dataFetcher.score_safety < 70)
+            scoreSafety.source = "images/lv10.png"
+        else if(dataFetcher.score_safety < 76)
+            sscoreSafety.source = "images/lv11.png"
+        else if(dataFetcher.score_safety < 82)
+            scoreSafety.source = "images/lv12.png"
+        else if(dataFetcher.score_safety < 88)
+            scoreSafety.source = "images/lv13.png"
+        else if(dataFetcher.score_safety < 94)
+            scoreSafety.source = "images/lv14.png"
+        else
+            scoreSafety.source = "images/lv15.png"
     }
 }

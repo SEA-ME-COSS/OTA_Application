@@ -47,75 +47,35 @@ Item {
             fillMode: Image.PreserveAspectFit
         }
 
-        Canvas {
+        DrawPath {
             id: pathCanvas
             anchors.fill: parent
-
-            onPaint: {
-                var ctx = getContext("2d");
-                ctx.clearRect(0, 0, width, height);
-                ctx.fillStyle = "#008000";
-
-                //console.log("!!!!!!!!!!!!!")
-                //console.log(dataFetcher.locations.length)
-
-                for (var i = 0; i < dataFetcher.locations.length; i++) {
-                    var point = dataFetcher.locations[i];
-                    var drawX = 210 + point.x * 1.5;
-                    var drawY = 150 + point.y * 1.5;
-
-                    ctx.beginPath();
-                    ctx.arc(drawX, drawY, 3, 0, 2 * Math.PI);
-                    ctx.fill();
-                }
-            }
+            dotColor: "#008000"
+            points: dataFetcher.locations
         }
 
-        Canvas {
+        DrawPath {
             id: accelCanvas
             anchors.fill: parent
-
-            onPaint: {
-                var ctx = getContext("2d");
-                ctx.clearRect(0, 0, width, height);
-                ctx.fillStyle = "#FF0000";
-
-                //console.log("!!!!!!!!!!!!!")
-                //console.log(dataFetcher.acceleration.length)
-
-                for (var i = 0; i < dataFetcher.acceleration.length; i++) {
-                    var point = dataFetcher.acceleration[i];
-                    var drawX = 210 + point.x * 1.5;
-                    var drawY = 150 + point.y * 1.5;
-
-                    ctx.beginPath();
-                    ctx.arc(drawX, drawY, 3, 0, 2 * Math.PI);
-                    ctx.fill();
-                }
-            }
+            dotColor: "#FF0000"
+            points: dataFetcher.acceleration
         }
 
-        Canvas {
+        DrawPath {
             id: decelCanvas
             anchors.fill: parent
+            dotColor: "#FFFF00"
+            points: dataFetcher.deceleration
+        }
 
-            onPaint: {
-                var ctx = getContext("2d");
-                ctx.clearRect(0, 0, width, height);
-                ctx.fillStyle = "#FFFF00";
+        Connections {
+            target: home
 
-                //console.log("!!!!!!!!!!!!!")
-                //console.log(dataFetcher.deceleration.length)
-
-                for (var i = 0; i < dataFetcher.deceleration.length; i++) {
-                    var point = dataFetcher.deceleration[i];
-                    var drawX = 210 + point.x * 1.5;
-                    var drawY = 150 + point.y * 1.5;
-
-                    ctx.beginPath();
-                    ctx.arc(drawX, drawY, 3, 0, 2 * Math.PI);
-                    ctx.fill();
-                }
+            onRedrawPath: {
+                console.log("!!!!!!!!!!!?????????!!!!!!!!!!!11")
+                pathCanvas.requestPaint();
+                accelCanvas.requestPaint();
+                decelCanvas.requestPaint();
             }
         }
     }

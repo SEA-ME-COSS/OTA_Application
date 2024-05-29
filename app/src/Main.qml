@@ -32,6 +32,8 @@ Window {
         source: "content/Map.qml"
         anchors.fill: parent
         visible: false
+
+        property alias home: homeLoader.item
     }
 
     Loader {

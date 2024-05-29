@@ -9,6 +9,7 @@ Item {
     anchors.top: parent.top
 
     property string updateTime: Qt.formatDateTime(new Date(), "hh:mm")
+    signal redrawPath
 
     Rectangle {
         id: blank_user_name
@@ -116,8 +117,8 @@ Item {
         }
 
         Text {
-            text: "MINI Cooper SE"
-            font.pointSize: 22
+            text: "Cybertruck"
+            font.pointSize: 30
             font.weight: Font.Black
             anchors.centerIn: parent
         }
@@ -133,10 +134,11 @@ Item {
 
         //color: "black"
 
-        Image {
-            source: "images/car_demo.png"
+        AnimatedImage  {
+            source: "images/cyber_truck.gif"
             anchors.fill: parent
             fillMode: Image.PreserveAspectFit
+            speed: 0.7
         }
     }
 
@@ -173,14 +175,14 @@ Item {
                 MouseArea {
                    anchors.fill: parent
                    onClicked: {
-                       console.log("update")
-                       dataFetcher.fetchData()
-                       updateTime = Qt.formatDateTime(new Date(), "hh:mm")
+                        console.log("update")
+                        dataFetcher.fetchData()
+                        updateTime = Qt.formatDateTime(new Date(), "hh:mm")
+                        redrawPath()
                    }
                }
             }
         }
-
     }
 
     Rectangle {
@@ -261,6 +263,7 @@ Item {
 
     Connections {
         target: ota
+
         function onNewUpdate() {
             alarm_button_icon.source = "images/alarm_on.png"
         }

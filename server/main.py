@@ -13,10 +13,10 @@ UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def get_mysql_connection():
-    connection = pymysql.connect(host='seame.cp2yk2eew78f.eu-central-1.rds.amazonaws.com',
-                                 user='root',
-                                 password='12341234',
-                                 db='seame',
+    connection = pymysql.connect(host='',
+                                 user='',
+                                 password='',
+                                 db='',
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
     return connection
@@ -59,7 +59,7 @@ def upload_file():
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
     file.save(file_path)
 
-    file_url = f"http://172.20.10.9:80/files/{file.filename}"
+    file_url = f"http://Sever_Address/files/{file.filename}"
     
     sha256 = hashlib.sha256()
     with open(file_path, 'rb') as f:
@@ -77,7 +77,7 @@ def upload_file():
     
     print(checksum)
 
-    publish.single("ota/update", payload_str, hostname="172.20.10.9", port=1883)
+    publish.single("ota/update", payload_str, hostname="MQTT_Address", port=1883)
 
     return 'File uploaded and update notification sent'
 

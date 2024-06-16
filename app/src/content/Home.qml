@@ -10,6 +10,7 @@ Item {
 
     property string updateTime: Qt.formatDateTime(new Date(), "hh:mm")
     signal redrawPath
+    signal updateStyle
 
     Rectangle {
         id: blank_user_name
@@ -132,7 +133,12 @@ Item {
         height: parent.height * 0.5
         anchors.top: car_model_name.bottom
 
-        //color: "black"
+        Image {
+            source: "images/Tesla.png"
+
+            width: 80
+            height: 80
+        }
 
         AnimatedImage  {
             source: "images/cyber_truck.gif"
@@ -178,6 +184,7 @@ Item {
                         console.log("update")
                         dataFetcher.fetchData()
                         updateTime = Qt.formatDateTime(new Date(), "hh:mm")
+                        updateStyle()
                         redrawPath()
                    }
                }

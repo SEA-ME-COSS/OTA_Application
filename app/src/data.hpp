@@ -22,7 +22,12 @@ class Data : public QObject {
     Q_PROPERTY(QVariantList locations READ locations NOTIFY locationsChanged)
     Q_PROPERTY(QVariantList acceleration READ acceleration NOTIFY warnChanged)
     Q_PROPERTY(QVariantList deceleration READ deceleration NOTIFY warnChanged)
+    Q_PROPERTY(QVariantList night READ night NOTIFY warnChanged)
     Q_PROPERTY(int openingSignal READ openingSignal WRITE setopeningSignal NOTIFY openingInitialized)
+    Q_PROPERTY(int acel_score READ acel_score NOTIFY dataChanged)
+    Q_PROPERTY(int dcel_score READ dcel_score NOTIFY dataChanged)
+    Q_PROPERTY(int night_score READ night_score NOTIFY dataChanged)
+    Q_PROPERTY(int driving_type READ driving_type NOTIFY dataChanged)
 
 public:
     Data(QObject *parent = nullptr);
@@ -37,8 +42,13 @@ public:
     QVariantList locations() const;
     QVariantList acceleration() const;
     QVariantList deceleration() const;
+    QVariantList night() const;
     int openingSignal() const;
     void setopeningSignal(int openingSignal);
+    int acel_score() const;
+    int dcel_score() const;
+    int night_score() const;
+    int driving_type() const;
 
 signals:
     void dataChanged();
@@ -63,7 +73,12 @@ private:
     QVariantList m_locations;
     QVariantList m_accel;
     QVariantList m_decel;
+    QVariantList m_night;
     int m_openingSignal = 0;
+    int m_acel_score;
+    int m_dcel_score;
+    int m_night_score;
+    int m_driving_type;
 };
 
 #endif // DATA_HPP

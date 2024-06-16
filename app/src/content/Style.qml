@@ -42,14 +42,22 @@ Item {
         }
 
         Image {
-            id: scoreTime
-            source: time()
+            id: scoreSafety
+            source: safety()
 
             width: 230
             height: 50
 
             x: 150
             y: 100
+
+            MouseArea {
+               anchors.fill: parent
+               onClicked: {
+                    styleLoader.visible = false
+                    safetyDetailLoader.visible = true
+               }
+           }
         }
 
         Image {
@@ -64,8 +72,8 @@ Item {
         }
 
         Image {
-            id: scoreSafety
-            source: safety()
+            id: scoreTime
+            source: time()
 
             width: 230
             height: 50
@@ -73,7 +81,6 @@ Item {
             x: 150
             y: 330
         }
-
     }
 
     Rectangle {
@@ -84,18 +91,18 @@ Item {
         anchors.top: style_main.bottom
 
         Image {
-            source: "images/style_comment.png"
+            id: drivingType
+            source: type()
             anchors.fill: parent
             fillMode: Image.PreserveAspectFit
-        }
 
-        Text {
-            text: "Comment"
-            font.pointSize: 30
-            font.weight: Font.Black
-
-            x: 140
-            y: 55
+            MouseArea {
+               anchors.fill: parent
+               onClicked: {
+                    styleLoader.visible = false
+                    typeDescriptionLoader.visible = true
+               }
+           }
         }
     }
 
@@ -187,7 +194,7 @@ Item {
         else if(dataFetcher.score_safety < 70)
             scoreSafety.source = "images/lv10.png"
         else if(dataFetcher.score_safety < 76)
-            sscoreSafety.source = "images/lv11.png"
+            scoreSafety.source = "images/lv11.png"
         else if(dataFetcher.score_safety < 82)
             scoreSafety.source = "images/lv12.png"
         else if(dataFetcher.score_safety < 88)
@@ -196,5 +203,35 @@ Item {
             scoreSafety.source = "images/lv14.png"
         else
             scoreSafety.source = "images/lv15.png"
+    }
+
+    function type() {
+        if(dataFetcher.driving_type === 0)
+            drivingType.source = "images/sloth_type.png"
+        else if(dataFetcher.driving_type === 1)
+            drivingType.source = "images/wolf_type.png"
+        else if(dataFetcher.driving_type === 2)
+            drivingType.source = "images/panda_type.png"
+        else if(dataFetcher.driving_type === 3)
+            drivingType.source = "images/elephant_type.png"
+        else if(dataFetcher.driving_type === 4)
+            drivingType.source = "images/wildboar_type.png"
+        else if(dataFetcher.driving_type === 5)
+            drivingType.source = "images/lion_type.png"
+        else if(dataFetcher.driving_type === 6)
+            drivingType.source = "images/turtle_type.png"
+        else if(dataFetcher.driving_type === 7)
+            drivingType.source = "images/cheetah_type.png"
+    }
+
+    Connections {
+        target: home
+
+        onUpdateStyle: {
+            time();
+            safety();
+            fuel();
+            type();
+        }
     }
 }

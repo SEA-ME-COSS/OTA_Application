@@ -6,10 +6,11 @@
 #include <QNetworkProxy>
 
 Ota::Ota(QObject *parent) : QObject(parent)
-{  
-    //qDebug() << "!!!!!!!!!!!!!!!!!!1Device supports OpenSSL: " << QSslSocket::supportsSsl();
+{
+    qDebug() << "Device supports OpenSSL: " << QSslSocket::supportsSsl();
+
     m_client = new QMqttClient(this);
-    m_client->setHostname("192.168.0.109");
+    m_client->setHostname("MQTT_Broker_Address");
     m_client->setPort(1883);
 
     connect(m_client, &QMqttClient::connected, this, &Ota::onConnected);
@@ -31,7 +32,7 @@ void Ota::publishMessage()
 {
     if (m_client->state() == QMqttClient::Connected)
     {
-        m_client->publish(QMqttTopicName("ota/update_url"), m_url.toUtf8());
+        m_client->publish(QMqttTopicName("ota/response"), "yes");
     }
     else
     {
@@ -55,7 +56,7 @@ void Ota::subscribeToTopic(const QString &topic)
 void Ota::onConnected()
 {
     qDebug() << "Connected to broker";
-    subscribeToTopic("ota/update");
+    subscribeToTopic("ota/update_possible");
 }
 
 void Ota::onMessageReceived(const QByteArray &message, const QMqttTopicName &topic)

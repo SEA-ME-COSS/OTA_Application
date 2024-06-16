@@ -26,7 +26,6 @@ Item {
                 MouseArea {
                    anchors.fill: parent
                    onClicked: {
-                       console.log("style")
                         toStyle()
                    }
                }
@@ -50,7 +49,6 @@ Item {
                 MouseArea {
                    anchors.fill: parent
                    onClicked: {
-                       console.log("home")
                         toHome()
                    }
                }
@@ -75,7 +73,6 @@ Item {
                 MouseArea {
                    anchors.fill: parent
                    onClicked: {
-                       console.log("map")
                         toMap()
                    }
                }
@@ -87,7 +84,9 @@ Item {
         styleLoader.visible = false
         mapLoader.visible = false
         homeLoader.visible = true
-        updateLoader.visible=false
+        updateLoader.visible = false
+        safetyDetailLoader.visible = false
+        typeDescriptionLoader.visible = false
 
         style_image.source = "images/home_style.png"
         home_image.source = "images/home_home.png"
@@ -99,6 +98,8 @@ Item {
         homeLoader.visible = false
         mapLoader.visible = false
         updateLoader.visible=false
+        safetyDetailLoader.visible = false
+        typeDescriptionLoader.visible = false
 
         style_image.source = "images/style_style.png"
         home_image.source = "images/style_home.png"
@@ -110,6 +111,8 @@ Item {
         homeLoader.visible = false
         mapLoader.visible = true
         updateLoader.visible=false
+        safetyDetailLoader.visible = false
+        typeDescriptionLoader.visible = false
 
         style_image.source = "images/map_style.png"
         home_image.source = "images/map_home.png"

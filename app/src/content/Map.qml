@@ -30,8 +30,22 @@ Item {
     Rectangle {
         id: blank_map1
         width: parent.width
-        height: parent.height * 0.13
+        height: parent.height * 0.1
         anchors.top: blank_map_main.bottom
+    }
+
+    Rectangle {
+        id: map_detail
+        width: parent.width * 0.6
+        height: parent.height * 0.03
+        anchors.top: blank_map1.bottom
+        anchors.right: parent.right
+
+        Image {
+            source: "images/map_detail.png"
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
+        }
     }
 
     Rectangle {
@@ -39,7 +53,7 @@ Item {
 
         width: parent.width
         height: parent.width
-        anchors.top: blank_map1.bottom
+        anchors.top: map_detail.bottom
 
         Image {
             source: "images/map.png"
@@ -55,9 +69,17 @@ Item {
         }
 
         DrawPath {
+            id: nightCanvas
+            anchors.fill: parent
+            dotColor: "#8B00FF"
+            points: dataFetcher.night
+        }
+
+        DrawPath {
             id: accelCanvas
             anchors.fill: parent
             dotColor: "#FF0000"
+            dotSize: 5
             points: dataFetcher.acceleration
         }
 
@@ -65,6 +87,7 @@ Item {
             id: decelCanvas
             anchors.fill: parent
             dotColor: "#FFFF00"
+            dotSize: 5
             points: dataFetcher.deceleration
         }
 
@@ -72,8 +95,9 @@ Item {
             target: home
 
             onRedrawPath: {
-                console.log("!!!!!!!!!!!?????????!!!!!!!!!!!11")
+                console.log("!!!!!!!!!!!?????????!!!!!!!!!!!")
                 pathCanvas.requestPaint();
+                nightCanvas.requestPaint();
                 accelCanvas.requestPaint();
                 decelCanvas.requestPaint();
             }

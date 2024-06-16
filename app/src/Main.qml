@@ -5,7 +5,7 @@ Window {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Hello User!")
 
     Loader {
         id: splashScreenLoader
@@ -17,7 +17,7 @@ Window {
         id: homeLoader
         source: "content/Home.qml"
         anchors.fill: parent
-        visible: false
+        visible: false        
     }
 
     Loader {
@@ -25,6 +25,8 @@ Window {
         source: "content/Style.qml"
         anchors.fill: parent
         visible: false
+
+        property alias home: homeLoader.item
     }
 
     Loader {
@@ -43,10 +45,25 @@ Window {
         visible: false
     }
 
+    Loader {
+        id: safetyDetailLoader
+        source: "content/SafetyDetail.qml"
+        anchors.fill: parent
+        visible: false
+
+        property alias home: homeLoader.item
+    }
+
+    Loader {
+        id: typeDescriptionLoader
+        source: "content/TypeDescription.qml"
+        anchors.fill: parent
+        visible: false
+    }
+
     Timer {
         id: loading
-        interval: 100
-           //4500
+        interval: 4500
         running: true
         repeat: false
         onTriggered: {

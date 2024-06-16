@@ -3,6 +3,8 @@ from flask_restx import Api, Resource
 import pymysql
 import paho.mqtt.publish as publish
 import os
+import hashlib
+import json
 
 app = Flask(__name__)
 api = Api(app)
@@ -11,10 +13,10 @@ UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def get_mysql_connection():
-    connection = pymysql.connect(host='',
-                                 user='',
-                                 password='',
-                                 db='',
+    connection = pymysql.connect(host='seame.cp2yk2eew78f.eu-central-1.rds.amazonaws.com',
+                                 user='root',
+                                 password='12341234',
+                                 db='seame',
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
     return connection
@@ -57,8 +59,25 @@ def upload_file():
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
     file.save(file_path)
 
-    file_url = f"http://127.0.0.1:80/files/{file.filename}"
-    publish.single("ota/update", file_url, hostname="localhost", port=1883)
+    file_url = f"http://172.20.10.9:80/files/{file.filename}"
+    
+    sha256 = hashlib.sha256()
+    with open(file_path, 'rb') as f:
+        for block in iter(lambda: f.read(4096), b""):
+            sha256.update(block)
+
+    checksum = sha256.hexdigest()
+
+    payload = {
+        "url": file_url,
+        "checksum": checksum
+    }
+
+    payload_str = json.dumps(payload)
+    
+    print(checksum)
+
+    publish.single("ota/update", payload_str, hostname="172.20.10.9", port=1883)
 
     return 'File uploaded and update notification sent'
 

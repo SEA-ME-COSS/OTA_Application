@@ -1,12 +1,13 @@
 android-sdk/
 *.keystore
 setUp/
-*.user
+*.user*
 user.*
 build/
 *.txt
 tmp/
-map.png
-car_demo.png
 *.gif
 server/
+*gradle* 
+*libs*
+*res*

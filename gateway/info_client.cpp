@@ -98,7 +98,6 @@ void on_message(struct mosquitto *mosq, void *userdata, const struct mosquitto_m
                 if (calculated_checksum == expected_checksum) {
                     std::cout << "Checksum verification passed" << std::endl;
 
-                    // Send update possible message
                     std::string update_possible_msg = R"({"status": "update_possible"})";
                     mosquitto_publish(mosq, NULL, "ota/update_possible", update_possible_msg.size(), update_possible_msg.c_str(), 0, false);
                 } else {
@@ -129,7 +128,7 @@ int main(int argc, char *argv[]) {
     mosquitto_connect_callback_set(mosq, on_connect);
     mosquitto_message_callback_set(mosq, on_message);
 
-    if (mosquitto_connect(mosq, "127.0.0.1", 1883, 60) != MOSQ_ERR_SUCCESS) {
+    if (mosquitto_connect(mosq, "MQTT_Broker_Address", 1883, 60) != MOSQ_ERR_SUCCESS) {
         std::cerr << "Failed to connect to MQTT broker" << std::endl;
         return 1;
     }

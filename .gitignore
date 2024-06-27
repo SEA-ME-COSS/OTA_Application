@@ -4,10 +4,5 @@ setUp/
 *.user*
 user.*
 build/
-*.txt
 tmp/
 *.gif
-server/
-*gradle* 
-*libs*
-*res*

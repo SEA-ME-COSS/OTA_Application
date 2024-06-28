@@ -45,7 +45,7 @@ docker compose up -d
 docker exec -it docker-me_app /bin/bash # Enter Application Container
 docker exec -it docker-me_server /bin/bash # Enter Server Container
 
-# Install Qt6 and Android SDK Tools using apt or official website
+# Install Qt6 and Android SDK Tools using apt or official website in Application container
 ```
 
 # Reference

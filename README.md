@@ -20,9 +20,13 @@ In addition, the user's driving style is analyzed and provided based on safety, 
   <img width="24%" src="https://github.com/Ho-mmd/ME_Digital-Trip-Book_App/assets/55338823/b007abdc-e808-47c7-aa38-81502c9c8deb">
 </div>
 
-This application is also for the **OTA** part of the [Autonomous-Driving-System](https://github.com/SEA-ME-COSS/Autonomous-Driving-System) project. It was developed with QT6, Android SDK Tools and MQTT. 
+This application is also for the **OTA** part of the [Autonomous-Driving-System](https://github.com/SEA-ME-COSS/Autonomous-Driving-System) project. It was developed with QT6, Android SDK Tools and MQTT. </br>
 
-![Architecture_OTA](https://github.com/Ho-mmd/ME_Digital-Trip-Book_App/assets/55338823/16594667-fad0-4db5-aac2-ee35ada8ec9d)
+![Architecture_OTA](https://github.com/Ho-mmd/ME_Digital-Trip-Book_App/assets/55338823/16594667-fad0-4db5-aac2-ee35ada8ec9d) <br/>
+
+OTA Detailed Architecture
+
+![OTA Archi](https://github.com/Ho-mmd/Connected_Vehicle_App/assets/55338823/ce67f232-f4ed-4433-b68c-978e1c245214)
 
 # Requirements
 
